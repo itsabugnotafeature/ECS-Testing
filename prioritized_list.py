@@ -6,21 +6,23 @@ class PrioritizedList:
         self.max_length = max_length
         self.reversed = reversed
 
-        # The priorities are stored as the first item in a tuple
-        # The second item in the tuple is a list of all items that have that priority
+        # This stores the items in order of priority
         self.priority_list = []
-        # This list holds all currently used priorities as keys to their index in self.priority_list
-        self.priorities = {}
+        # This dict holds all currently used priorities as keys to a list of all items that have that priority
+        self._priority_dict = {}
 
     def add_item(self, item, priority=None):
         # For priority, if it is not reversed then lower numbers will come first
         # if it is reversed then the highest numbers will come first
         # None is always the lowest priority in the list
         # Between items that have the same priority, most recently added ones come first
+        # Each item can only be in the list once
 
-        # Is the priority already in the list?
-        if self.priorities.get(priority):
-            # If so then find the appropriate list and insert it at the beginning
-            self.priority_list[self.priorities[priority]].insert(item, -1)
+        # Is the item already in the list?
+        if item in self.priority_list:
+            self.priority_list.remove(item)
+
+        if priority in self._priority_dict:
+
 
 
